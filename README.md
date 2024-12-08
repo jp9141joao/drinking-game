@@ -45,22 +45,6 @@ O jogo utiliza as seguintes tecnologias:
 - **JavaScript (ES6)**: Lógica principal, interatividade e eventos no jogo.
 - **Bootstrap**: Framework CSS para um layout responsivo e amigável.
 
----
-
-## 📂 **Estrutura do Projeto**
-
-```
-/jogo-de-bebida
-│
-├── index.html         # Página principal e interface do jogo
-├── css/
-│   └── style.css     # Estilização principal do jogo
-├── js/
-│   ├── desafios.js   # Lógica de desafios
-│   ├── perguntas.js  # Gerenciamento das perguntas
-│   └── script.js     # Lógica central do jogo
-│
-└── README.md         # Documentação do projeto
 ```
 
 ### Descrição dos principais arquivos:
