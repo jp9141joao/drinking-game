@@ -1,0 +1,1305 @@
+
+<!DOCTYPE html>
+<html lang="en"> <!-- Translated language attribute -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home • Drinking Games</title> <!-- Translated title -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script>
+            // Function: NeverHaveIEverSystem
+            // Description: Initializes and handles the "Never Have I Ever" game logic for a specified number of players.
+            let NeverHaveIEverSystem = (numberOfPlayers) => {
+
+                // Question banks for different levels of difficulty
+                let EasyQuestionBank = [
+                    'I have attempted a recipe that turned out badly.',
+                    'I have missed a bus or train.',
+                    'I have eaten food that fell on the floor.',
+                    'I have worn pajamas all day.',
+                    'I have sung in the shower.',
+                    'I have laughed so hard I cried.',
+                    'I have pretended to be asleep to avoid something.',
+                    'I have lent something and it was never returned to me.',
+                    'I have forgotten someone’s birthday.',
+                    'I have accidentally played a mean prank.',
+                    'I have gotten lost inside a shopping mall.',
+                    'I have been mistaken for someone else.',
+                    'I have been stuck in traffic for more than 2 hours.',
+                    'I have tried to solve a Rubik’s cube without success.',
+                    'I have spilled food or drink on my clothes in public.',
+                    'I have fallen off a bicycle.',
+                    'I have bought something I never used.',
+                    'I have accidentally taken a funny photo without noticing.',
+                    'I have seen a rainbow.',
+                    'I have gone without internet for an entire day.',
+                    'I have had a pet.',
+                    'I have won a prize or medal.',
+                    'I have fallen asleep during a class or meeting.',
+                    'I have made friends during a trip.',
+                    'I have tried learning a new skill and given up.',
+                    'I have drawn or painted for fun.',
+                    'I have played hide-and-seek.',
+                    'I have read a whole book in one day.',
+                    'I have tried a different ice cream flavor.',
+                    'I have sent a message to the wrong person.',
+                    'I have invented an excuse to stay home.',
+                    'I have told a joke nobody understood.',
+                    'I have watched a movie multiple times because I love it.',
+                    'I have been moved to tears by a movie or series.',
+                    'I have participated in a Secret Santa.',
+                    'I have played in the rain.',
+                    'I have set up a camping tent.',
+                    'I have ridden a carousel.',
+                    'I have made a cake or dessert on my own.',
+                    'I have received a note or letter from someone.',
+                    'I have given a handmade gift.',
+                    'I have planted or cared for a plant.',
+                    'I have played a board game with friends or family.',
+                    'I have dressed in funny clothes or costumes.',
+                    'I have visited a museum or historical park.',
+                    'I have waded into the sea or a river.',
+                    'I have played with soap bubbles.',
+                    'I have seen a shooting star.',
+                    'I have ridden a bicycle for fun.',
+                    'I have attended a costume party.'
+                ];
+
+                let MediumQuestionBank = [
+                    'I stayed up all night just for fun.',
+                    'I helped a stranger without expecting anything in return.',
+                    'I binge-watched movies or series in one day.',
+                    'I wanted to learn a new language.',
+                    'I did something that seemed hard but turned out easy.',
+                    'I joined a competition just for fun.',
+                    'I told a story that nobody believed.',
+                    'I gave someone a surprise gift.',
+                    'I was surprised by a friend or family member.',
+                    'I made a plan that went completely wrong.',
+                    'I got confused speaking in another language.',
+                    'I made a promise I later regretted.',
+                    'I got lost in a new place and ended up discovering something cool.',
+                    'I tried to build or fix something by myself.',
+                    'I felt proud of something I did with no help.',
+                    'I felt emotional over an unexpected compliment.',
+                    'I forgot something important and had to improvise.',
+                    'I took a trip that did not go as planned.',
+                    'I made a friend in an unusual situation.',
+                    'I helped organize a party or event.',
+                    'I took part in a fun school or group project.',
+                    'I tried to learn a musical instrument.',
+                    'I read or heard a story that changed my perspective.',
+                    'I gathered the courage to apologize to someone.',
+                    'I invented or created something interesting with simple materials.',
+                    'I heard or told a funny family story.',
+                    'I played a game that looked simple but was very hard.',
+                    'I imagined what it would be like to live in another country.',
+                    'I did something on impulse and laughed later.',
+                    'I volunteered for a community activity.',
+                    'I tried cooking something entirely different.',
+                    'I was surprised by someone’s generosity.',
+                    'I found something valuable I thought was lost a long time ago.',
+                    'I kept an important secret for someone.',
+                    'I did something to overcome my fear.',
+                    'I asked someone more experienced for advice.',
+                    'I thought about changing my career or field of study completely.',
+                    'I regretted missing an opportunity.',
+                    'I did something that seemed impossible at first.',
+                    'I sent a message and immediately regretted it.',
+                    'I did something unexpected to cheer someone up.',
+                    'I experienced an unforgettable group moment.',
+                    'I visited a famous or historical place.',
+                    'I did something I thought nobody else would.',
+                    'I saw something so beautiful I took a picture or video to remember it.',
+                    'I tried writing a story or poem.',
+                    'I dreamed of meeting a famous person.',
+                    'I imagined what the future would be in 10 years.',
+                    'I received an unexpected gift and loved it.'
+                ];
+
+                let HardQuestionBank = [
+                    'I did something that I had to apologize for afterward.',
+                    'I had to help someone in a difficult situation.',
+                    'I kept a major secret for a long time.',
+                    'I regretted something I said or did.',
+                    'I faced a big fear to help someone.',
+                    'I dreamed of completely changing my life.',
+                    'I tried to solve a very complicated problem alone.',
+                    'I gave up something important because I felt I couldn’t do it.',
+                    'I did something that seemed impossible at first.',
+                    'I helped a friend or family member during a tough time.',
+                    'I made a very tough decision and got it right.',
+                    'I handled criticism that hurt me deeply.',
+                    'I had to apologize publicly.',
+                    'I felt intimidated by a big challenge but overcame it.',
+                    'I did something unexpected that changed my life for the better.',
+                    'I learned a valuable lesson from a mistake.',
+                    'I had to stand up for someone even though it was risky.',
+                    'I was responsible for leading an important group or project.',
+                    'I did something to change someone’s mind or attitude.',
+                    'I regretted not trying something because I was afraid to fail.',
+                    'I had to solve a problem under intense pressure.',
+                    'I had to choose between two equally difficult options.',
+                    'I had to give up something I really wanted.',
+                    'I achieved a very challenging goal.',
+                    'I had to cope with a significant loss.',
+                    'I faced a major challenge at work or in my studies.',
+                    'I mustered the courage to tell someone something very important.',
+                    'I did something that I felt proud of afterward.',
+                    'I inspired someone without realizing it.',
+                    'I asked for help to overcome a difficulty.',
+                    'I overcame a big fear or insecurity.',
+                    'I learned something important from a difficult situation.',
+                    'I accepted a challenge I thought I couldn’t handle.',
+                    'I surprised myself by discovering a strength or ability I didn’t know I had.',
+                    'I had to stay calm in a very tense situation.',
+                    'I helped someone even when it seemed impossible.',
+                    'I felt very grateful for something simple.',
+                    'I made a decision that changed the course of my life.',
+                    'I had to admit a big mistake to a group of people.',
+                    'I faced a huge physical or mental challenge.',
+                    'I was deeply moved seeing someone achieve their dream.',
+                    'I changed my opinion about something important after learning more.',
+                    'I overcame a very difficult time with the help of others.',
+                    'I took part in a moment that made me believe in myself more.',
+                    'I mustered the courage to face something I had avoided for a long time.',
+                    'I felt inspired by someone who went through a bigger challenge than mine.'
+                ];
+
+                let ImpossibleQuestionBank = [
+                    'I had to make a decision that completely changed my life.',
+                    'I faced something that seemed insurmountable.',
+                    'I challenged myself to learn something extremely difficult.',
+                    'I helped someone even when it seemed impossible.',
+                    'I achieved a dream I thought was unattainable.',
+                    'I deeply regretted not trying something important.',
+                    'I had to solve a problem that nobody else could.',
+                    'I completely changed my opinion about something very important.',
+                    'I had to give up something I loved for a good reason.',
+                    'I managed to forgive someone when it seemed impossible.',
+                    'I faced a situation that tested all my limits.',
+                    'I went further than I ever thought I could in a project or challenge.',
+                    'I overcame a fear that haunted me for years.',
+                    'I inspired someone without realizing it at the time.',
+                    'I mustered the courage to confess something very important to someone.',
+                    'I made a decision that affected many other people.',
+                    'I deeply regretted something and took actions to fix it.',
+                    'I significantly changed someone’s life.',
+                    'I received unexpected help at a critical moment.',
+                    'I created something that others thought was amazing.',
+                    'I had to deal with a situation that seemed unsolvable.',
+                    'I was surprised to discover a strength within me I didn’t know I had.',
+                    'I did something nobody believed I could.',
+                    'I overcame a very difficult situation on my own.',
+                    'I turned a big mistake into an opportunity.',
+                    'I had to motivate an entire group to achieve an impossible goal.',
+                    'I helped someone reach a very challenging objective.',
+                    'I handled a situation where everything was against me and I still won.',
+                    'I felt completely fulfilled after facing a big challenge.',
+                    'I challenged myself to do something that scared me greatly and succeeded.',
+                    'I did something extraordinary that seemed impossible at the start.',
+                    'I managed to surpass something I always thought was my weak point.',
+                    'I dedicated months or years to achieve a specific goal.',
+                    'I maintained my composure in a high-pressure situation.',
+                    'I received praise for something I thought I did badly.',
+                    'I made a decision that affected many people beyond myself.',
+                    'I accepted a challenge without being sure I could and succeeded.',
+                    'I helped solve a collective problem that seemed impossible.',
+                    'I faced a big fear and came out stronger.',
+                    'I worked hard to achieve something that seemed unlikely.',
+                    'I took a significant risk to reach a greater goal.',
+                    'I let go of something important for someone else.',
+                    'I was recognized for something I worked very hard on.',
+                    'I overcame a challenge that seemed endless.',
+                    'I was deeply moved achieving a personal goal.',
+                    'I inspired others to face big challenges.',
+                    'I lived through a situation that felt like a dream come true.'
+                ];
+
+                // Game state variables
+                let roundCounter = [1];
+                let totalPlayers = numberOfPlayers;
+                let usedIndices = [];
+                let questionCount = [1];
+                let currentPlayer = 0;
+
+                // Get the "Next Round" button element
+                let startNextRoundButton = document.getElementById('Never_Have_IEver_Next');
+
+                // Event listener for starting each round
+                startNextRoundButton.addEventListener('click', () => {
+
+                    // If all questions have been asked, go to the end page
+                    if (questionCount[0] > 160) {
+                        showLoadingPage();
+                        setTimeout(() => { hideLoadingPage(4); }, 1000);
+                        return;
+                    }
+
+                    // Cycle through players
+                    if (currentPlayer < totalPlayers) {
+                        currentPlayer += 1;
+                    } else {
+                        currentPlayer = 1;
+                    }
+
+                    // Reset round counter if it reaches 41
+                    if (roundCounter[0] == 41) {
+                        roundCounter[0] = 1;
+                    }
+
+                    // Reset used indices every 40 questions
+                    if (questionCount[0] == 41 || questionCount[0] == 81 || questionCount[0] == 121) {
+                        usedIndices = [];
+                    }
+
+                    startNextRoundButton.innerHTML = 'Next Round!';
+
+                    // Run the game logic for "Never Have I Ever"
+                    NeverHaveIEverGame(roundCounter, usedIndices, currentPlayer, questionCount, EasyQuestionBank, MediumQuestionBank, HardQuestionBank, ImpossibleQuestionBank);
+                });
+
+            }
+
+            // Function: NeverHaveIEverGame
+            // Description: Handles the selection and display of questions based on difficulty and tracks penalties.
+            let NeverHaveIEverGame = (roundCounter, usedIndices, currentPlayer, questionCount, EasyQuestions, MediumQuestions, HardQuestions, ImpossibleQuestions) => {
+                showLoadingPage();
+                setTimeout(() => { hideLoadingPage(1); }, 1000);
+
+                let randomIndex;
+                let descriptionElement = document.getElementById("Never_Have_IEver_Description");
+                let difficultyElement = document.getElementById("Never_Have_IEver_Difficulty");
+                let playerElement = document.getElementById("Never_Have_IEver_Player");
+                let roundsElement = document.getElementById("Never_Have_IEver_Rounds");
+                let penaltyElement = document.getElementById("Never_Have_IEver_Penalty");
+
+                // Determine difficulty based on question count
+                if (questionCount[0] <= 40) {
+                    // Easy questions
+                    do {
+                        randomIndex = getRandomNumber(0, EasyQuestions.length - 1);
+                    } while (usedIndices.includes(randomIndex));
+                    usedIndices.push(randomIndex);
+                    descriptionElement.innerHTML = `${EasyQuestions[randomIndex].toUpperCase()}`;
+                    difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspEasy.';
+                    playerElement.innerHTML = '';
+                    penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1 Sip.`;
+                } else if (questionCount[0] <= 80) {
+                    // Medium questions
+                    do {
+                        randomIndex = getRandomNumber(0, MediumQuestions.length - 1);
+                    } while (usedIndices.includes(randomIndex));
+                    usedIndices.push(randomIndex);
+                    descriptionElement.innerHTML = `${MediumQuestions[randomIndex].toUpperCase()}`;
+                    difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspMedium.';
+                    playerElement.innerHTML = '';
+                    penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp2 Sips.`;
+                } else if (questionCount[0] <= 120) {
+                    // Hard questions
+                    do {
+                        randomIndex = getRandomNumber(0, HardQuestions.length - 1);
+                    } while (usedIndices.includes(randomIndex));
+                    usedIndices.push(randomIndex);
+                    descriptionElement.innerHTML = `${HardQuestions[randomIndex].toUpperCase()}`;
+                    difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspHard.';
+                    playerElement.innerHTML = '';
+                    penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1/2 Shot.`;
+                } else {
+                    // Impossible questions
+                    do {
+                        randomIndex = getRandomNumber(0, ImpossibleQuestions.length - 1);
+                    } while (usedIndices.includes(randomIndex));
+                    usedIndices.push(randomIndex);
+                    descriptionElement.innerHTML = `${ImpossibleQuestions[randomIndex].toUpperCase()}`;
+                    difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspImpossible.';
+                    playerElement.innerHTML = '';
+                    penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1 Shot.`;
+                }
+
+                // Display current player and rounds remaining
+                playerElement.innerHTML = `<strong>Player:</strong> &nbspPlayer ${currentPlayer}.`;
+                roundsElement.innerHTML = `<strong>Rounds remaining:</strong> &nbsp${roundCounter[0]} of 40.`;
+
+                // Increment counters
+                roundCounter[0] += 1;
+                questionCount[0] += 1;
+            }
+
+            // Function: TruthOrDareSystem
+            // Description: Initializes and handles the "Truth or Dare" game logic for a specified number of players.
+            let TruthOrDareSystem = (numberOfPlayers) => {
+
+                // Truth and Dare banks for different levels
+                let EasyTruthBank = [
+                    'What is your favorite animal and why?',
+                    'What was the last thing that made you laugh a lot?',
+                    'What is your favorite food?',
+                    'If you could travel anywhere in the world, where would you go?',
+                    'What is the coolest gift you’ve ever received?',
+                    'If you could be a character from a movie or book, who would you be?',
+                    'What song do you like the most?',
+                    'Have you ever forgotten something funny or important at home?',
+                    'What was the silliest thing that ever made you nervous?',
+                    'What was your favorite childhood game?',
+                    'If you could learn something instantly, what would it be?',
+                    'What is your favorite dessert?',
+                    'If you could have any superpower, what would it be?',
+                    'Do you prefer cold or hot weather? Why?',
+                    'What movie or cartoon marked your childhood the most?',
+                    'If you could be any animal for a day, which would it be?',
+                    'What is your favorite ice cream flavor?',
+                    'Have you ever done something by mistake that became hilarious?',
+                    'What would be the best day of your life?',
+                    'If you could eat only one thing for the rest of your life, what would it be?',
+                    'What is your favorite color?',
+                    'If you could have any animal as a pet, what would it be?',
+                    'Do you prefer waking up early or sleeping in?',
+                    'What is the funniest thing that happened at school or work?',
+                    'If you could be famous for something, what would it be?',
+                    'What cartoon or series do you like to watch the most?',
+                    'Have you ever eaten something and later discovered it was different from what you thought?',
+                    'If you could trade places with someone for a day, who would it be?',
+                    'What is the most fun thing you’ve ever done with friends?',
+                    'If you could choose any profession in the future, what would it be?',
+                    'What is your favorite fruit?',
+                    'Have you ever tried something complicated and succeeded?',
+                    'If you could live in any era of history, which would you choose?',
+                    'What was the best trip you ever took?',
+                    'Do you prefer watching movies or series? Which is your favorite?',
+                    'What is your favorite game or pastime?',
+                    'If you could invent something that doesn’t exist, what would it be?',
+                    'Have you ever given a handmade gift?',
+                    'If you could talk to anyone in the world, who would it be?',
+                    'What was the best day of your week?',
+                    'What is a food everyone likes but you don’t?',
+                    'What is the most creative thing you’ve ever done?',
+                    'If you could change one thing in the world, what would it be?',
+                    'What would be your perfect birthday party?',
+                    'If you could visit another planet, which would you choose?',
+                    'Have you ever found something you thought you had lost?',
+                    'What is your favorite hobby or pastime?',
+                    'What is the funniest thing that happened to you recently?',
+                    'If you could have any artistic skill, what would it be?',
+                    'Do you prefer sweet or salty?'
+                ];
+
+                let EasyDareBank = [
+                    'Imitate the sound of your favorite animal.',
+                    'Dance for 30 seconds without music.',
+                    'Strike a funny pose and hold it for 10 seconds.',
+                    'Say a phrase in a different voice, like a robot or a child.',
+                    'Give someone in the room a hug.',
+                    'Sing a verse of a song you like.',
+                    'Tell a joke or a funny story.',
+                    'Pretend to play an imaginary musical instrument.',
+                    'Choose a player and make a funny face at them.',
+                    'Stand still like a statue for 20 seconds.',
+                    'Do 5 jumping jacks.',
+                    'Name 5 animals in 10 seconds.',
+                    'Hop like a frog 3 times.',
+                    'Pretend to eat a lemon and make a sour face.',
+                    'Say something funny about what you’re wearing.',
+                    'Walk across the room like a penguin.',
+                    'Act out something and let others guess what it is.',
+                    'Draw a sun on paper in 20 seconds.',
+                    'Greet someone in the room with an exaggerated handshake.',
+                    'Strike a superhero pose.',
+                    'Say the alphabet backwards (or try!).',
+                    'Imitate the sound of a car horn.',
+                    'Come up with a dance routine to an imaginary song.',
+                    'Choose a word and name as many synonyms as you can in 10 seconds.',
+                    'Pretend you are talking on the phone with a famous person.',
+                    'Count to 10 while pinching your nose.',
+                    'Say something funny without using words (only gestures).',
+                    'Draw with your eyes closed and show it to the group.',
+                    'Choose someone and have them give you a simple task to perform.',
+                    'Pretend you are rowing an imaginary boat.',
+                    'Do 10 creative dance steps.',
+                    'Create a slogan for a product that doesn’t exist.',
+                    'Tell a quick, funny story you make up on the spot.',
+                    'Swap places with someone in the room without using your hands.',
+                    'Say three things you like to do without naming them (let others guess).',
+                    'Make a sound like something, such as rain or an airplane.',
+                    'Move around the room in slow motion.',
+                    'Write your name in the air with your finger.',
+                    'Balance on one foot for 10 seconds.',
+                    'Pretend you are speaking in an alien language and say something.',
+                    'Pretend you are selling an imaginary product to the group.',
+                    'Gesture or sign something to describe your favorite food.',
+                    'Try to balance a small object on your head for 10 seconds.',
+                    'Name 3 fruits starting with a letter chosen by someone.',
+                    'Draw something simple in 30 seconds and show it to the group.',
+                    'Pretend you are taking a funny selfie.',
+                    'Choose someone and give them a special handshake.'
+                ];
+
+                let MediumTruthBank = [
+                    'What is the bravest thing you have ever done?',
+                    'What skill would you like to learn if you had time?',
+                    'What is the funniest moment in your life?',
+                    'If you could change something from your past, what would it be?',
+                    'What is the best advice you have ever received?',
+                    'If you could be an animal for a day, which would it be and why?',
+                    'What is the weirdest dream you have ever had?',
+                    'What truly makes you happy even on tough days?',
+                    'What is the most unbelievable thing you have ever seen?',
+                    'Do you prefer planning everything or living in the moment?',
+                    'What is the biggest challenge you have ever faced?',
+                    'What is your happiest childhood memory?',
+                    'What would you do if you won the lottery today?',
+                    'What was the most special gift you ever received?',
+                    'If you could choose any place to live, where would it be?',
+                    'What talent or skill do you admire in others?',
+                    'If you could trade places with someone for a day, who would it be?',
+                    'What is the most unusual food you have ever tried?',
+                    'What is the funniest thing that happened to you in public?',
+                    'If you could go back in time and change something, what would it be?',
+                    'What was the hardest thing you ever learned that was worth it?',
+                    'Have you ever had a day that started bad but ended great? Tell us about it.',
+                    'What is your greatest strength, in your opinion?',
+                    'What is the weirdest thing you have found or seen?',
+                    'If you could spend a day with anyone famous, who would it be?',
+                    'If you had to choose only one hobby, what would it be?',
+                    'What is the most beautiful place you have ever visited?',
+                    'If you could invent something revolutionary, what would it be?',
+                    'What was the most fun game or activity you ever participated in?',
+                    'What was the biggest compliment you ever received?',
+                    'What was the hardest task you ever completed?',
+                    'If you could be invisible for a day, what would you do?',
+                    'What is the biggest dream you have for the future?',
+                    'If you could change a rule in the world, what would it be?',
+                    'What do you value most in a friendship?',
+                    'If you were stranded on a deserted island, what would you take?'
+                ];
+
+                let MediumDareBank = [
+                    'Sing the chorus of a famous song without mistakes.',
+                    'Pretend you are hosting a TV show for 1 minute.',
+                    'Imitate an animal chosen by someone in the room.',
+                    'Draw something funny and let others guess what it is.',
+                    'Give a creative compliment to each person in the room.',
+                    'Create a sentence using only words that start with the same letter.',
+                    'Stand on one foot for 20 seconds while counting to 10.',
+                    'Invent a funny story in 30 seconds.',
+                    'Balance a small object on your head for 15 seconds.',
+                    'Name 10 objects in less than 15 seconds.',
+                    'Draw without lifting your pencil from the paper.',
+                    'Choose someone to give you a super creative handshake.',
+                    'Pretend you are driving an imaginary car with enthusiasm.',
+                    'Name 5 cities that start with the letter "A."',
+                    'Create a 30-second dance and perform it.',
+                    'Act out a famous movie scene using only facial expressions.',
+                    'Imitate a news anchor for 1 minute.',
+                    'Walk like an astronaut across the room.',
+                    'Do 10 squats while counting backward.',
+                    'Create a funny slogan for an imaginary product.',
+                    'Choose someone to do a "funny face" challenge with you.',
+                    'Pretend you are walking a tightrope.',
+                    'Say three of your qualities and one you want to improve.',
+                    'Invent a language and teach a word to others.',
+                    'Sing a song with funny sounds instead of words.',
+                    'Strike a superhero pose for 15 seconds.',
+                    'Mime your favorite food.',
+                    'Create a creative superhero name and describe your power.',
+                    'Tell a quick, funny story using only gestures.',
+                    'Pretend you are playing a trumpet with your mouth while walking.'
+                ];
+
+                let HardTruthBank = [
+                    'What was the hardest decision you ever made in your life?',
+                    'Have you ever given up on something important? What was it?',
+                    'What is your biggest fear that you haven’t overcome?',
+                    'What was the moment you felt most challenged?',
+                    'What is the most curious secret you ever kept?',
+                    'Have you ever had to apologize for something very serious?',
+                    'What is the thing you regret not doing the most?',
+                    'Have you ever refused to help someone out of fear or insecurity?',
+                    'What was the hardest moment you had to face alone?',
+                    'What is the biggest goal you haven’t achieved yet?',
+                    'If you could change one moment from your past, what would it be?',
+                    'What was the biggest lesson you learned from a mistake?',
+                    'Have you ever had to do something against your beliefs? Why?',
+                    'What was the most embarrassing situation you ever faced?',
+                    'Have you ever been ashamed to ask someone for help?',
+                    'What was the most courageous moment in your life?',
+                    'Have you ever overcome a paralyzing fear? What was it?',
+                    'What was the biggest risk you ever took?',
+                    'If you could ask forgiveness from someone, who would it be?',
+                    'What is your biggest insecurity and how do you deal with it?',
+                    'Have you ever missed an opportunity because you didnt believe in yourself? What was it?',
+                    'What was the hardest promise you ever had to keep?',
+                    'Have you ever faced a situation where you had to choose between yourself and someone else?',
+                    'What was the biggest sacrifice you ever made for someone?',
+                    'Have you ever had to keep a very important secret?',
+                    'If you could change one thing about yourself, what would it be?',
+                    'What is the hardest dream you still want to achieve?',
+                    'Have you ever had to handle a very harsh criticism? How did you react?',
+                    'What was the biggest misunderstanding you have ever experienced?',
+                    'Have you ever faced a situation where no one believed in you? What was it?',
+                    'What was the most emotional moment you ever experienced?',
+                    'Have you ever helped someone in secret? What did you do?',
+                    'What was the most important decision you ever made?',
+                    'Have you ever regretted something you said to someone? What was it?',
+                    'What was the biggest compliment you ever received and how did it make you feel?',
+                    'Have you ever faced a major failure? What did you learn from it?',
+                    'If you could give advice to your younger self, what would you say?',
+                    'Have you ever had to take responsibility for someone else’s mistake? How did it go?',
+                    'What was the moment you felt most proud of yourself?',
+                    'Have you ever given up something you loved? What was it?',
+                    'What was the hardest choice you ever made between two options?',
+                    'Have you ever been surprised by a lesson you didn’t expect to learn?',
+                    'What is the most important thing you learned about yourself?'
+                ];
+
+                let HardDareBank = [
+                    'Pretend you are giving an important speech to a crowd.',
+                    'Try to impersonate a celebrity for 30 seconds.',
+                    'Dance as if you are at an energetic party for 1 minute.',
+                    'Tell a funny story with a serious expression.',
+                    'Mime something very simple without speaking.',
+                    'Choose an object and make a funny dance with it.',
+                    'Sing an opera-style song for 30 seconds.',
+                    'Pretend you are trapped in an elevator and ask for help finally.',
+                    'Make a funny pose and hold it for 20 seconds without laughing.',
+                    'Draw something on paper with eyes closed and show it.',
+                    'Do 10 jumps in place as if celebrating a victory.',
+                    'Imitate a musical instrument using only your voice.',
+                    'Describe a hypothetical scenario and try to convince the group it is real.',
+                    'Find an object in the room and create a short theatrical scene with it.',
+                    'Pretend you are being interviewed by a reporter.',
+                    'Do a 30-second dance celebration without music.',
+                    'Sing any song but use a different voice (hoarse, high, low, etc.).',
+                    'Use gestures to draw a sun in the air for 20 seconds.',
+                    'Try to stay still like a statue while others try to make you laugh.',
+                    'Recreate a famous movie scene using only facial expressions.',
+                    'Ask someone to create a quick challenge for you to do immediately.',
+                    'Engage in an imaginary dance for 30 seconds with hands or feet.',
+                    'Perform a dance routine based on a random song chosen by someone.',
+                    'Choose a fictional character and act like them for 30 seconds.',
+                    'Imitate an animal sound chosen by anyone in the group.',
+                    'Draw something with eyes closed for 30 seconds and explain what it is.',
+                    'Choose a small object and create a funny scene where it is the main character.',
+                    'Try to make a funny angry face and hold it for 15 seconds.',
+                    'Do 10 gymnastics-like moves in place as if in a TV challenge.',
+                    'Pretend you are driving a funny or dangerous vehicle for 30 seconds.',
+                    'Create a funny sentence about anything around you in 20 seconds.',
+                    'Do a silly dance mixing simple moves for 30 seconds.',
+                    'Pick an everyday object and pretend it is a superpower device for 1 minute.',
+                    'Sing fruit names as if in a theatrical performance.',
+                    'Draw an imaginary map on paper and explain it to the group.',
+                    'Pick a word and make a rhyming sentence with it.',
+                    'Create a challenge where everyone must do a fun action at the same time.',
+                    'Do 10 yoga or stretching moves in one spot.',
+                    'Recreate a cartoon scene using only gestures and sounds.',
+                    'Try to mimic a funny past event you experienced.',
+                    'Pretend you are training for a marathon in an exaggerated way for 30 seconds.'
+                ];
+
+                let ImpossibleDareBank = [
+                    'Pretend you are in a talent show presenting something amazing.',
+                    'Dance freestyle in the middle of the room for 1 minute.',
+                    'Exaggerate an animal impression for 30 seconds.',
+                    'Create a sentence with made-up words and try to convince others it makes sense.',
+                    'Pick an object and create a creative story where it is the main character.',
+                    'Do 20 jumping jacks while telling a funny joke.',
+                    'Pretend you are in a marathon and celebrate like you won the race.',
+                    'Draw in the air using your finger as if painting for 30 seconds.',
+                    'Dance like a superhero for 45 seconds without losing the rhythm.',
+                    'Create a funny beat using only hand and foot claps.',
+                    'Imitate a celebrity or famous character for 30 seconds and let others guess who it is.',
+                    'Choose someone and perform a theatrical challenge with them, like an improvised movie scene.',
+                    'Try to walk like a zombie or robot for 30 seconds.',
+                    'Pretend you are driving an imaginary plane or train in a funny way for 30 seconds.',
+                    'Mime an adventure scene, like climbing a mountain or crossing a river.',
+                    'Pretend a cup of water is a magical potion giving you superpowers for 20 seconds.',
+                    'Create a humorous slogan for a fictional product.',
+                    'Do a hand-only dance for 30 seconds.',
+                    'Pick a simple object and pretend it is an advanced technological device.',
+                    'Draw something hilarious with eyes closed on paper and show it.',
+                    'Do an extremely funny yoga pose and hold it for 15 seconds.',
+                    'Imitate a news anchor voice for 1 minute saying something funny.',
+                    'Act out a scene as if in an alternate reality video game with an imaginary backdrop.',
+                    'Create a group challenge where everyone must do a funny action simultaneously.',
+                    'Develop a mini-theater scene in 45 seconds with a comedic theme.',
+                    'Dance like you just won the lottery.',
+                    'Pretend you are in an important meeting for 30 seconds but do something funny in the middle.',
+                    'Create a 20-second rhyming phrase that is funny.',
+                    'Pretend a chair is a spaceship for 30 seconds.',
+                    'Make gestures as if you are caught in an imaginary storm for 30 seconds.',
+                    'Dance like you are in a quirky TV commercial for 30 seconds.',
+                    'Imitate a trumpet sound or music using only your voice.',
+                    'Create a physical challenge for everyone to do together for 30 seconds.',
+                    'Draw an imaginary funny image in the air with your finger while others guess.',
+                    'Develop a scene where you are a mad scientist conducting an experiment.',
+                    'Pretend you are being interviewed by aliens for 30 seconds.',
+                    'Try to invent a superpower for yourself and demonstrate how it would physically work.',
+                    'Draw a funny expression with eyes closed while everyone watches.',
+                    'Do a dance inspired by an instrument you pretend to play.',
+                    'Pick two simple objects and create a funny scene where they are characters.',
+                    'Try to walk around the room like you are in a circus with silly steps for 30 seconds.',
+                    'Pretend you are in an epic battle with an imaginary sword for 30 seconds.',
+                    'Sing a popular song in opera style, changing the lyrics in a funny way.',
+                    'Recreate a famous commercial using a funny situation in the room.',
+                    'Create an improvised dance mixing all possible moves for 30 seconds.',
+                    'Pretend you are participating in a dance Olympics and perform creative moves.',
+                    'Make a funny vehicle sound and try to convince others it’s real.',
+                    'Do a series of simple moves as if inventing a new exercise sequence.',
+                    'Pretend you are practicing an absurd sport, like bread fighting or balloon racing.'
+                ];
+
+                // Game state variables for Truth or Dare
+                let roundIndex = [1];
+                let totalPlayersTruthOrDare = numberOfPlayers;
+                let usedIndicesTruth = [];
+                let usedIndicesDare = [];
+                let totalQuestionsTruthOrDare = [1];
+                let currentPlayerTruthOrDare = 0;
+
+                // Get the "Next" button element for Truth or Dare
+                let startNextTruthOrDareButton = document.getElementById('Truth_Dare_Next');
+
+                // Event listener for starting each round of Truth or Dare
+                startNextTruthOrDareButton.addEventListener('click', () => {   
+
+                    // If all questions are done, go to end page
+                    if (totalQuestionsTruthOrDare[0] > 160) {
+                        showLoadingPage();
+                        setTimeout(() => { hideLoadingPage(4); }, 1000);
+                        return;
+                    }
+
+                    // Cycle through players
+                    if (currentPlayerTruthOrDare < totalPlayersTruthOrDare) {
+                        currentPlayerTruthOrDare += 1;
+                    } else {
+                        currentPlayerTruthOrDare = 1;
+                    }
+
+                    // Reset round index if it reaches 41
+                    if (roundIndex[0] == 41) {
+                        roundIndex[0] = 1;
+                    }
+
+                    // Reset used indices every 40 questions
+                    if (totalQuestionsTruthOrDare[0] == 41 || totalQuestionsTruthOrDare[0] == 81 || totalQuestionsTruthOrDare[0] == 121) {
+                        usedIndicesTruth = [];
+                        usedIndicesDare = [];
+                    }
+
+                    startNextTruthOrDareButton.innerHTML = 'Next Round!';
+                    TruthOrDareGame(roundIndex, usedIndicesTruth, usedIndicesDare, EasyTruthBank, EasyDareBank, MediumTruthBank, MediumDareBank, HardTruthBank, HardDareBank, ImpossibleDareBank, currentPlayerTruthOrDare, totalQuestionsTruthOrDare);
+                });
+
+            }
+
+            // Function: TruthOrDareGame
+            // Description: Handles the selection and display of truth or dare prompts, alternating based on difficulty levels.
+            let TruthOrDareGame = (roundIndex, usedIndicesTruth, usedIndicesDare, EasyTruth, EasyDare, MediumTruth, MediumDare, HardTruth, HardDare, ImpossibleDare, currentPlayer, totalQuestions) => {
+
+                showLoadingPage();
+                setTimeout(() => { hideLoadingPage(2); }, 1000);
+
+                let promptType; // 1 for Dare, 2 for Truth
+                let randomIndex;
+                let promptTypeElement = document.getElementById('Truth_Dare_Type');
+                let promptDescriptionElement = document.getElementById('Truth_Dare_Description');
+                let difficultyElement = document.getElementById('Truth_Dare_Difficulty');
+                let playerElement = document.getElementById('Truth_Dare_Player');
+                let roundsElement = document.getElementById('Truth_Dare_Rounds');
+                let penaltyElement = document.getElementById('Truth_Dare_Penalty');
+
+                // Decide whether it's a truth or dare based on question count
+                if (totalQuestions[0] <= 80) {
+                    promptType = getRandomNumber(1, 2); 
+                } else if (totalQuestions[0] <= 120) {
+                    promptType = getRandomNumber(0, 2); 
+                } else {
+                    promptType = 1; // Always dare if more than 120
+                }
+
+                // If promptType is 1 or 0, it's a dare
+                if (promptType == 1 || promptType == 0) {
+                    promptTypeElement.innerHTML = '<strong>DARE</strong>';
+
+                    if (totalQuestions[0] <= 40) {
+                        // Easy Dare
+                        do {
+                            randomIndex = getRandomNumber(0, EasyDare.length - 1);
+                        } while (usedIndicesDare.includes(randomIndex));
+                        usedIndicesDare.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspEasy.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1 Sip.`;
+                        promptDescriptionElement.innerHTML = `${EasyDare[randomIndex].toUpperCase()}`;
+                    } else if (totalQuestions[0] <= 80) {
+                        // Medium Dare
+                        do {
+                            randomIndex = getRandomNumber(0, MediumDare.length - 1);
+                        } while (usedIndicesDare.includes(randomIndex));
+                        usedIndicesDare.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspMedium.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp2 Sips.`;
+                        promptDescriptionElement.innerHTML = `${MediumDare[randomIndex].toUpperCase()}`;
+                    } else if (totalQuestions[0] <= 120) {
+                        // Hard Dare
+                        do {
+                            randomIndex = getRandomNumber(0, HardDare.length - 1);
+                        } while (usedIndicesDare.includes(randomIndex));
+                        usedIndicesDare.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspHard.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1/2 Shot.`;
+                        promptDescriptionElement.innerHTML = `${HardDare[randomIndex].toUpperCase()}`;
+                    } else {
+                        // Impossible Dare
+                        do {
+                            randomIndex = getRandomNumber(0, ImpossibleDare.length - 1);
+                        } while (usedIndicesDare.includes(randomIndex));
+                        usedIndicesDare.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspImpossible.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1 Shot.`;
+                        promptDescriptionElement.innerHTML = `${ImpossibleDare[randomIndex].toUpperCase()}`;
+                    }
+
+                } else {
+                    // Truth prompt
+                    promptTypeElement.innerHTML = '<strong>TRUTH</strong>';
+
+                    if (totalQuestions[0] <= 40) {
+                        // Easy Truth
+                        do {
+                            randomIndex = getRandomNumber(0, EasyTruth.length - 1);
+                        } while (usedIndicesTruth.includes(randomIndex));
+                        usedIndicesTruth.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspEasy.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1 Sip.`;
+                        promptDescriptionElement.innerHTML = `${EasyTruth[randomIndex].toUpperCase()}`;
+                    } else if (totalQuestions[0] <= 80) {
+                        // Medium Truth
+                        do {
+                            randomIndex = getRandomNumber(0, MediumTruth.length - 1);
+                        } while (usedIndicesTruth.includes(randomIndex));
+                        usedIndicesTruth.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspMedium.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp2 Sips.`;
+                        promptDescriptionElement.innerHTML = `${MediumTruth[randomIndex].toUpperCase()}`;
+                    } else if (totalQuestions[0] <= 120) {
+                        // Hard Truth
+                        do {
+                            randomIndex = getRandomNumber(0, HardTruth.length - 1);
+                        } while (usedIndicesTruth.includes(randomIndex));
+                        usedIndicesTruth.push(randomIndex);
+                        difficultyElement.innerHTML = '<strong>Difficulty:</strong> &nbspHard.';
+                        penaltyElement.innerHTML = `<strong>Penalty:</strong> &nbsp1/2 Shot.`;
+                        promptDescriptionElement.innerHTML = `${HardTruth[randomIndex].toUpperCase()}`;
+                    }
+                }
+
+                // Display current player and rounds remaining
+                playerElement.innerHTML = `<strong>Player:</strong> &nbspPlayer ${currentPlayer}.`;
+                roundsElement.innerHTML = `<strong>Rounds remaining:</strong> &nbsp${roundIndex[0]} of 40.`;
+
+                // Increment counters
+                roundIndex[0] += 1;
+                totalQuestions[0] += 1;
+            }
+
+            // Function: showLoadingPage
+            // Description: Displays the loading spinner and hides other pages.
+            let showLoadingPage = () => {
+                let homePage = document.getElementById('Home_Page');
+                let loadingPage = document.getElementById('Loading_Page');
+                let truthDarePage = document.getElementById('Truth_Dare_Page');
+                let neverHaveIEverPage = document.getElementById('Never_Have_IEver_Page');
+                let makeOrDrinkPage = document.getElementById('Make_Or_Drink_Page');
+                let gameEndPage = document.getElementById('Game_End_Page');
+
+                // Hide all sections except loading
+                homePage.style.display = 'none';
+                loadingPage.style.display = 'block';
+                truthDarePage.style.display = 'none';
+                neverHaveIEverPage.style.display = 'none';
+                makeOrDrinkPage.style.display = 'none';
+                gameEndPage.style.display = 'none';
+            }
+
+            // Function: hideLoadingPage
+            // Description: Hides the loading spinner and shows the appropriate game page based on marker.
+            let hideLoadingPage = (marker) => {
+                let homePage = document.getElementById('Home_Page');
+                let loadingPage = document.getElementById('Loading_Page');
+                let truthDarePage = document.getElementById('Truth_Dare_Page');
+                let neverHaveIEverPage = document.getElementById('Never_Have_IEver_Page');
+                let makeOrDrinkPage = document.getElementById('Make_Or_Drink_Page');
+                let gameEndPage = document.getElementById('Game_End_Page');
+
+                if (marker == 1) {
+                    homePage.style.display = 'none';
+                    loadingPage.style.display = 'none';
+                    neverHaveIEverPage.style.display = 'block';
+                    truthDarePage.style.display = 'none';
+                    makeOrDrinkPage.style.display = 'none';
+                    gameEndPage.style.display = 'none';
+                } else if (marker == 2) {
+                    homePage.style.display = 'none';
+                    loadingPage.style.display = 'none';
+                    neverHaveIEverPage.style.display = 'none';
+                    truthDarePage.style.display = 'block';
+                    makeOrDrinkPage.style.display = 'none';
+                    gameEndPage.style.display = 'none';
+                } else if (marker == 3) {
+                    homePage.style.display = 'none';
+                    loadingPage.style.display = 'none';
+                    neverHaveIEverPage.style.display = 'none';
+                    truthDarePage.style.display = 'none';
+                    makeOrDrinkPage.style.display = 'block';
+                    gameEndPage.style.display = 'none';
+                } else if (marker == 4) {
+                    homePage.style.display = 'none';
+                    loadingPage.style.display = 'none';
+                    neverHaveIEverPage.style.display = 'none';
+                    truthDarePage.style.display = 'none';
+                    makeOrDrinkPage.style.display = 'none';
+                    gameEndPage.style.display = 'block';
+                } else if (marker == 5) {
+                    homePage.style.display = 'block';
+                    loadingPage.style.display = 'none';
+                    neverHaveIEverPage.style.display = 'none';
+                    truthDarePage.style.display = 'none';
+                    makeOrDrinkPage.style.display = 'none';
+                    gameEndPage.style.display = 'none';
+                }
+            }
+
+            // Function: getRandomNumber
+            // Description: Returns a random integer between min and max (inclusive).
+            let getRandomNumber = (min, max) => {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            // Function: goBack
+            // Description: Returns to the home page after a loading screen.
+            let goBack = () => {
+                showLoadingPage();
+                setTimeout(() => { hideLoadingPage(5); }, 1000);
+            }
+
+            // Function: Main
+            // Description: Sets up event listeners and initializes the home page interactions.
+            let Main = () => {
+
+                let gamesProgress = [];
+                let playersCount;
+
+                document.addEventListener("DOMContentLoaded", () => {
+
+                    // Get references to the radio buttons for game selection
+                    let neverHaveOption = document.getElementById('Never_Have_IEver_Option');
+                    let truthDareOption = document.getElementById('Truth_Dare_Option');
+                    let consoleText = document.getElementById('Game_Console');
+
+                    // Get the "Start Game" button
+                    let startGameButton = document.getElementById('Start_Game');
+
+                    startGameButton.addEventListener('click', () => {
+                        let marker = [];
+
+                        // If both games have been played, show completion message
+                        if (gamesProgress.length == 1) {
+                            consoleText.style.display = 'block';
+                            consoleText.innerHTML = 'Game Completed! You have already finished both games.';
+                            return;
+                        }
+
+                        // Prevent replaying the same game
+                        if ((gamesProgress.includes(1) && neverHaveOption.checked) || (gamesProgress.includes(2) && truthDareOption.checked)) {
+                            consoleText.style.display = 'block';
+                            consoleText.innerHTML = 'You have already played this game! Choose another.';
+                            return;
+                        }
+
+                        consoleText.innerHTML = '';
+
+                        // Determine number of players based on selected radio button
+                        if (document.getElementById('Two_Players').checked) {
+                            playersCount = 2;
+                        } else if (document.getElementById('Three_Players').checked) {
+                            playersCount = 3;
+                        } else if (document.getElementById('Four_Players').checked) {
+                            playersCount = 4;
+                        } else if (document.getElementById('Five_Players').checked) {
+                            playersCount = 5;
+                        } else if (document.getElementById('Six_Players').checked) {
+                            playersCount = 6;
+                        } else if (document.getElementById('Seven_Players').checked) {
+                            playersCount = 7;
+                        } else {
+                            playersCount = 8;
+                        }
+
+                        // If "Never Have I Ever" is selected
+                        if (neverHaveOption.checked) {
+                            gamesProgress.push(1);
+                            marker.push(1);
+                            showLoadingPage();
+                            setTimeout(() => { hideLoadingPage(marker[0]); }, 2000);
+                            NeverHaveIEverSystem(playersCount);
+                        } else if (truthDareOption.checked) {
+                            // If "Truth or Dare" is selected
+                            gamesProgress.push(2);
+                            marker.push(2);
+                            showLoadingPage();
+                            setTimeout(() => { hideLoadingPage(marker[0]); }, 2000);
+                            TruthOrDareSystem(playersCount);
+                        }
+
+                    });
+                });
+
+            }
+
+            // Initialize main function
+            Main();
+        </script>
+        <style>
+            .material-symbols-outlined {
+              font-variation-settings:
+              'FILL' 0,
+              'wght' 400,
+              'GRAD' 0,
+              'opsz' 24
+            }
+
+            .Icon_Size {
+                font-size: 50px;
+            }
+
+            body {
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
+
+        </style>
+    </head>
+    <body style="background-color: #313136;">
+        <!-- Home Page Section -->
+        <div id="Home_Page" style="display: block;">
+            <div class="row g-2 justify-content-center" style="margin-top: 8rem;">
+                <div class="col-md-4">
+                    <div class="d-flex text-center justify-content-center">
+                        <h1 class="text-white underline">Drinking Games</h1>
+                        <span class="material-symbols-outlined text-danger Icon_Size mx-2">sports_bar</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 text-center justify-content-center mt-4">
+                <div class="col-md-5">
+                    <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+                        <!-- Radio button for "Never Have I Ever" game -->
+                        <input type="radio" class="btn-check" name="btnradioGame" id="Never_Have_IEver_Option" autocomplete="off" checked>
+                        <label class="btn btn-lg btn-outline-light" for="Never_Have_IEver_Option">Never Have I Ever</label>
+
+                        <!-- Radio button for "Truth or Dare" game -->
+                        <input type="radio" class="btn-check btn-secondary" name="btnradioGame" id="Truth_Dare_Option" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light" for="Truth_Dare_Option">Truth or Dare</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center" style="margin-top: 3rem;">
+                <div class="col-md-5">
+                    <div class="d-flex text-center justify-content-center">
+                        <h1 class="text-white underline">Number of Players</h1>
+                        <span class="material-symbols-outlined text-danger Icon_Size mx-2">group</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center justify-content-center mt-4">
+                <div class="col-md-5">
+                    <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+                        <!-- Radio buttons for selecting number of players -->
+                        <input type="radio" class="btn-check w-100" name="btnradioPlayers" id="Two_Players" autocomplete="off" checked>
+                        <label class="btn btn-lg btn-outline-light w-100" for="Two_Players">2</label>
+
+                        <input type="radio" class="btn-check btn-secondary w-100" name="btnradioPlayers" id="Three_Players" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light w-100" for="Three_Players">3</label>
+
+                        <input type="radio" class="btn-check btn-secondary w-100" name="btnradioPlayers" id="Four_Players" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light w-100" for="Four_Players">4</label>
+
+                        <input type="radio" class="btn-check w-100" name="btnradioPlayers" id="Five_Players" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light w-100" for="Five_Players">5</label>
+
+                        <input type="radio" class="btn-check btn-secondary w-100" name="btnradioPlayers" id="Six_Players" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light w-100" for="Six_Players">6</label>
+
+                        <input type="radio" class="btn-check btn-secondary w-100" name="btnradioPlayers" id="Seven_Players" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light w-100" for="Seven_Players">7</label>
+
+                        <input type="radio" class="btn-check btn-secondary w-100" name="btnradioPlayers" id="Eight_Players" autocomplete="off">
+                        <label class="btn btn-lg btn-outline-light w-100" for="Eight_Players">8</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-5">
+                <div class="col-md-5">
+                    <div class="d-flex text-center">
+                        <p class="text-danger" id="Game_Console"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center">
+                <div class="col-md-5">
+                    <div class="d-flex">
+                        <button class="btn btn-lg w-100 bg-danger text-white px-0 mx-0" id="Start_Game">Go to the game!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-3">
+                <a class="link text-light text-center" data-bs-toggle="modal" data-bs-target="#rulesModal" style="cursor: pointer;">Rules</a>
+
+                <!-- Modal for rules -->
+                <div class="modal fade" id="rulesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="rulesModalLabel">Rules</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body bg-black text-white">
+                                <strong class="text-danger">Initial Ritual (Two Shots):</strong> The game starts with all participants taking two shots of the chosen drink, creating a relaxed atmosphere and an energetic start.<br><br>
+                                <strong class="text-danger">Generous Sips Between Transitions:</strong> Each transition between challenges is marked by participants taking three generous sips of alcohol; changing the game is marked by taking a shot, keeping the game dynamic and progressive.<br><br>
+                                <strong class="text-danger">Rewards and Penalties in Truth or Dare:</strong> Participants receive rewards for successfully completing challenges or answering questions in Truth or Dare. Failing results in penalties, such as drinking according to the challenge difficulty.<br><br>
+                                <strong class="text-danger">Lives in "Never Have I Ever":</strong> Each player starts with 6 lives, losing one when admitting to the experience. When all lives are lost, the player drinks according to difficulty. Completing 20 questions without losing lives earns a reward, but taking a sip resets lost lives.<br><br>
+                                <strong class="text-danger">Collective Challenges:</strong> If a challenge involves more than one player and at least one person refuses, everyone involved, including the challenger, drinks.<br><br>
+                                <strong class="text-danger">Differentiated Rewards:</strong> Reward logic varies with challenge difficulty, so rewards should be predefined by the players.<br><br>
+                                <strong class="text-danger">Drink Amount by Difficulty:</strong> Drink amount varies by challenge difficulty.<br>
+                                •&nbsp&nbsp&nbsp<strong>Easy:</strong> 1 Sip<br>
+                                •&nbsp&nbsp&nbsp<strong>Medium:</strong> 2 Sips<br>
+                                •&nbsp&nbsp&nbsp<strong>Hard:</strong> 1/2 Shot<br>
+                                •&nbsp&nbsp&nbsp<strong>Impossible:</strong> 1 Shot<br><br>
+                                <strong class="text-danger">Quit and Penalties:</strong> Leaving the game early means drinking three shots and performing a penalty for the group, whatever it may be.<br><br>
+                                <strong class="text-danger">Single Wildcard:</strong> Each player has one wildcard to skip a question or challenge.<br><br>
+                                <strong class="text-danger">Challenges Involving Outsiders:</strong> Challenges involving people outside the game are disqualified and replaced by others.<br><br>
+                                <strong class="text-danger">Adjust to Number of Players:</strong> The game should adapt to the number of participants to maintain fun.<br><br>
+                                <strong class="text-danger">End of Game:</strong> The game ends after completing all challenges in "Never Have I Ever" and "Truth or Dare" at all difficulties. Leaving early incurs penalties. If players finish the game, each participant receives a bonus (to be determined).<br><br>
+                                <strong class="text-danger">Sequence of Games:</strong> The order of games is set with 40 rounds of "Never Have I Ever" and 40 rounds of "Truth or Dare" at each difficulty.<br><br>
+                                <strong class="text-danger">Have Fun:</strong> A final reminder that the goal is to have fun, encouraging everyone to enjoy the journey without taking things personally.<br><br>
+                                <strong class="text-danger">Reward Shortage:</strong> To ensure a fair game, if rewards run out before the end, missing rewards will be appraised and converted to money according to a table, which the game organizer must cover. If a participant quits early, rewards are voided.<br>
+                                •&nbsp&nbsp&nbsp<strong>Easy:</strong> 1 currency unit<br>
+                                •&nbsp&nbsp&nbsp<strong>Medium:</strong> 2 currency units<br>
+                                •&nbsp&nbsp&nbsp<strong>Hard:</strong> 10 currency units<br>
+                                •&nbsp&nbsp&nbsp<strong>Impossible:</strong> 20 currency units
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Page Section -->
+        <div id="Loading_Page" style="display: none;">
+            <div class="row g-2 justify-content-center" style="margin-top: 20rem;">
+                <div class="spinner-grow text-light" role="status" style="width: 100px; height: 100px;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Truth or Dare Page Section -->
+        <div id="Truth_Dare_Page" style="display: none;">
+            <div class="row g-2 justify-content-center" style="margin-top: 8rem;">
+                <div class="col-md-4">
+                    <div class="d-flex text-center justify-content-center">
+                        <h1 class="text-white text-decoration-underline mr-4">Truth or Dare <span class="text-danger mx-2 text-decoration-underline">?</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-3 mb-3">
+                <div class="col-md-5">
+                    <div class="container-fluid px-0">
+                        <p class="text-danger text-start fs-5" id="Truth_Dare_Type"><br></p>
+                        <p class="text-white text-start mb-5" id="Truth_Dare_Description"><br></p>
+                        <p class="text-white text-start" id="Truth_Dare_Difficulty"><strong>Difficulty:</strong></p>
+                        <p class="text-white text-start" id="Truth_Dare_Player"><strong>Player:</strong></p>
+                        <p class="text-white text-start" id="Truth_Dare_Rounds"><strong>Rounds remaining:</strong></p>
+                        <p class="text-white text-start" id="Truth_Dare_Penalty"><strong>Penalty:</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center">
+                <div class="col-md-5">
+                    <div class="d-flex">
+                        <button class="btn btn-lg w-100 bg-danger text-white px-0 mx-0" id="Truth_Dare_Next">Start!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-3">
+                <a class="link text-light text-center" data-bs-toggle="modal" data-bs-target="#rulesModal1" style="cursor: pointer;">Rules</a>
+
+                <!-- Modal for Truth or Dare Rules -->
+                <div class="modal fade" id="rulesModal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="rulesModalLabel">Rules</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body bg-black text-white">
+                                <strong class="text-danger">Initial Ritual (Two Shots):</strong> The game begins with all participants taking two shots of the chosen drink, creating a relaxed environment and an energetic start.<br><br>
+                                <strong class="text-danger">Generous Sips Between Transitions:</strong> Each transition between challenges is marked by participants taking three generous sips of alcohol; changing the game requires a shot, keeping the game dynamic and progressive.<br><br>
+                                <strong class="text-danger">Rewards and Penalties in Truth or Dare:</strong> Participants receive rewards for successfully completing challenges or answering questions in Truth or Dare. Failing results in penalties, such as drinking according to challenge difficulty.<br><br>
+                                <strong class="text-danger">Lives in "Never Have I Ever":</strong> Each player starts with 6 lives, losing one when admitting to experiences. Losing all lives means drinking according to difficulty. Completing 20 questions without losing lives yields a reward, but taking a sip resets lost lives.<br><br>
+                                <!-- The following section pertains to the "Make or Drink" game, commented out if unused. -->
+                                <!--<strong class="text-danger">Lives and Shots in "Make or Drink":</strong> Each participant has two lives. Refusing challenges causes loss of a life. Losing both lives means drinking a shot.<br><br>-->
+                                <strong class="text-danger">Collective Challenges:</strong> If a challenge involves multiple players and at least one person refuses, everyone involved, including the challenger, drinks.<br><br>
+                                <strong class="text-danger">Single Wildcard:</strong> Each player has a wildcard to avoid one question or challenge.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Make or Drink Page Section (optional) -->
+        <div id="Make_Or_Drink_Page" style="display: none;">
+            <div class="row g-2 justify-content-center" style="margin-top: 8rem;">
+                <div class="col-md-4">
+                    <div class="d-flex text-center justify-content-center">
+                        <h1 class="text-white text-decoration-underline mr-4">Make or Drink</h1>
+                        <span class="material-symbols-outlined text-danger Icon_Size mx-2" style="transform: rotate(340deg);">local_bar</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-3 mb-3">
+                <div class="col-md-4">
+                    <div class="container-fluid px-0">
+                        <p class="text-danger text-start fs-5"><strong>DESCRIPTION</strong></p>
+                        <p class="text-white text-start" id="Make_Drink_Description"></p>
+                        <p class="text-white text-start" id="Make_Drink_Difficulty"></p>
+                        <p class="text-white text-start" id="Make_Drink_Player"></p>
+                        <p class="text-white text-start" id="Make_Drink_Rounds"></p>
+                        <p class="text-white text-start" id="Make_Drink_Reward"></p>
+                        <p class="text-white text-start" id="Make_Drink_Penalty"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center">
+                <div class="col-md-4">
+                    <div class="d-flex">
+                        <button class="btn btn-lg w-100 bg-danger text-white px-0 mx-0">Next round</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game End Page Section -->
+        <div id="Game_End_Page" style="display: none;">
+            <div class="row g-2 justify-content-center text-center" style="margin-top: 8rem;">
+                <div class="col-md-5">
+                    <div class="d-flex text-center justify-content-center">
+                        <h1 class="text-white text-decoration-underline mr-4 text-center">Game Over</h1>
+                        <span class="material-symbols-outlined text-danger Icon_Size mx-2">done</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-4 mb-4 text-center">
+                <div class="col-md-5">
+                    <div class="container-fluid px-0">
+                        <p class="text-white text-start fs-5 text-center"><strong class="text-danger">Congratulations</strong> you have completed all difficulties of this game.</p>
+                        <p class="text-white text-start" id="Game_Progress"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center">
+                <div class="col-md-5">
+                    <div class="d-flex">
+                        <button class="btn btn-lg w-100 bg-danger text-white px-0 mx-0" onclick="goBack()">Go Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+        <!-- Never Have I Ever Page Section -->
+        <div id="Never_Have_IEver_Page" style="display: none;">
+            <div class="row g-2 justify-content-center" style="margin-top: 8rem;">
+                <div class="col-md-4">
+                    <div class="d-flex text-center justify-content-center">
+                        <h1 class="text-white text-decoration-underline mr-4">Never Have I Ever</h1>
+                        <span class="material-symbols-outlined text-danger Icon_Size mx-2">pan_tool</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-3 mb-3">
+                <div class="col-md-4">
+                    <div class="container-fluid px-0">
+                        <p class="text text-danger text-start fs-5"><strong>Never Have I Ever...</strong></p>
+                        <p class="text text-white text-start mb-5" id="Never_Have_IEver_Description"></p>
+                        <p class="text text-white text-start" id="Never_Have_IEver_Difficulty"><strong>Difficulty:</strong></p>
+                        <p class="text text-white text-start" id="Never_Have_IEver_Player"><strong>Player:</strong></p>
+                        <p class="text text-white text-start" id="Never_Have_IEver_Rounds"><strong>Rounds remaining:</strong></p>
+                        <p class="text text-white text-start" id="Never_Have_IEver_Penalty"><strong>Penalty:</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center">
+                <div class="col-md-4">
+                    <div class="d-flex">
+                        <button class="btn btn-lg w-100 bg-danger text-white px-0 mx-0" id="Never_Have_IEver_Next">Start!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 justify-content-center mt-3">
+                <a class="link text-light text-center" data-bs-toggle="modal" data-bs-target="#rulesModal2" style="cursor: pointer;">Rules</a>
+
+                <!-- Modal for Never Have I Ever Rules -->
+                <div class="modal fade" id="rulesModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rulesModal2Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="rulesModal2Label">Rules</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body bg-black text-white">
+                                <strong class="text-danger">Lives in "Never Have I Ever":</strong> Each player starts with 6 lives, losing one when admitting to a statement. Losing all lives means drinking according to difficulty. Completing 20 statements without losing lives earns a reward, but taking a sip resets lost lives.<br><br>
+                                <strong class="text-danger">Collective Challenges:</strong> If a statement involves multiple players and at least one person refuses, everyone involved, including the speaker, drinks.<br><br>
+                                <strong class="text-danger">Differentiated Rewards:</strong> Reward logic varies with difficulty level and should be predefined by players.<br><br>
+                                <strong class="text-danger">Drink Amount by Difficulty:</strong><br>
+                                • <strong>Easy:</strong> 1 Sip<br>
+                                • <strong>Medium:</strong> 2 Sips<br>
+                                • <strong>Hard:</strong> 1/2 Shot<br>
+                                • <strong>Impossible:</strong> 1 Shot<br><br>
+                                <strong class="text-danger">Single Wildcard:</strong> Each player has one wildcard to skip a statement.<br><br>
+                                <strong class="text-danger">Quit and Penalties:</strong> Leaving the game early means drinking three shots and performing a group penalty, whatever it may be.<br><br>
+                                <strong class="text-danger">Adjust to Number of Players:</strong> The game adapts to the number of participants to stay fun.<br><br>
+                                <strong class="text-danger">End of Game:</strong> The game ends after completing all statements at all difficulties. Leaving early voids any rewards. If players finish the game, each participant receives a bonus (to be determined).<br><br>
+                                <strong class="text-danger">Have Fun:</strong> The goal is to have fun and enjoy the journey without taking things personally.<br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
